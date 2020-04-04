@@ -10,7 +10,7 @@ class Product (models.Model):
         ("Used", "Used")
     )
 
-    #contain all the products informations
+    #contain all the products information
     name = models.CharField(max_length=100)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     description = models.TextField(max_length=500)
