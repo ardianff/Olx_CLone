@@ -3,5 +3,5 @@
 
 
 {% for product in product_list %}
-    <h2>{{product}}</h2>
-{% endfor %} 
+    <h2><a href="{% url 'products:product_detail' product.slug %}">{{product}}</h2></a>
+{% endfor %}
