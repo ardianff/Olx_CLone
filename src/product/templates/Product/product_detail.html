@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-	{% block body %}
+{% block body %}
 	<!--single-page-->
 	<div class="single-page main-grid-border">
 		<div class="container">
@@ -15,11 +15,14 @@
 					<p> <i class="glyphicon glyphicon-map-marker"></i><a href="#">state</a>, <a href="#">city</a>| Added at {{product_detail.created}}, Ad ID: 987654321</p>
 					<div class="flexslider">
 						<ul class="slides">
-							{% for image in product_images  %}
-							<li data-thumb="{{image.image.url}}">
-								<img src="{{image.image.url}}" />
-							</li>
-							{% endfor %}
+                            
+                            {% for image in product_images %}
+                                                        
+                                <li data-thumb="{{image.image.url}}">
+                                    <img src="{{image.image.url}}" />
+                                </li>
+
+                            {% endfor %}
 						</ul>
 					</div>
 					<!-- FlexSlider -->
@@ -39,7 +42,7 @@
 					<div class="product-details">
 						<h4>Brand : <a href="#">{{product_detail.brand}}</a></h4>
 						<h4>Views : <strong>150</strong></h4>
-						<p><strong>Summary</strong> : {{product_detail.description}}</p>
+						<p><strong>Summary</strong> {{product_detail.description}}</p>
 					
 					</div>
 				</div>
@@ -85,4 +88,5 @@
 		</div>
 	</div>
 	<!--//single-page-->
-	{% endblock body %}
+
+{% endblock body %}

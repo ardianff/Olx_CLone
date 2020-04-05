@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
-	
+
 {% block body %}
+  
 	<!-- Products -->
 	<div class="total-ads main-grid-border">
 		<div class="container">
@@ -43,19 +44,18 @@
 			<div class="all-categories">
 				<h3> Select your category and find the perfect ad</h3>
 				<ul class="all-cat-list">
-					{% for category in category_list  %}
-						<li><a href="{% url 'products:product_list_category' category.slug %}">{{category.category_name}} <span class="num-of-ads">({{category.total_products}})</span></a></li>
-					{% endfor %}
+                    
+                    {% for category in category_list %}
+					    <li><a href="{% url 'products:product_list_category' category.slug  %}">{{category}} <span class="num-of-ads">({{category.total_products}})</span></a></li>
+                    {% endfor %}
 				</ul>
 			</div>
 			<ol class="breadcrumb" style="margin-bottom: 5px;">
 			  <li><a href="/">Home</a></li>
-			  <li class="active"><a href="{% url 'products:product_list' %}">All Ads</a></li>
-			  
-			  {% if category %}
-			  <li class="active">{{category}}</li>
-			  {% endif %}
-				  
+              <li class="active"> <a href="{% url 'products:product_list' %}"> All Ads </a></li>
+              {% if category %}
+              <li class="active">{{category}}</li>
+              {% endif %}
 			  
 			</ol>
 			<div class="ads-grid">
@@ -67,7 +67,7 @@
 						<input type="submit" value=" ">
 					</form>
 				</div>
-
+				
 				<div class="featured-ads">
 					<h2 class="sear-head fer">Featured Ads</h2>
 					<div class="featured-ad">
@@ -119,53 +119,57 @@
 
 								<div class="clearfix"></div>
 							<ul class="list">
-								{% for product in product_list %}
-									<a href="{% url 'products:product_detail' product.slug%}">
-										<li>
-										<img src="{{product.image.url}}" title="" alt="" />
-										<section class="list-left">
-										<h5 class="title">{{product.name}}</h5>
-										<span class="adprice">$ {{product.price}}</span>
-										<p class="catpath">{{product.category}} » {{product.brand}}</p>
-										</section>
-										<section class="list-right">
-										<span class="date">Date, {{product.created}}</span>
-										<span class="cityname">City name</span>
-										</section>
-										<div class="clearfix"></div>
-										</li> 
-									</a>
-								{% endfor %}
+                                
+                                {% for product in product_list %}
+                                    <a href="{% url 'products:product_detail' product.slug %}">
+                                        <li>
+                                        <img src="{{product.image.url}}" title="" alt="" />
+                                        <section class="list-left">
+                                        <h5 class="title">{{product.name}}</h5>
+                                        <span class="adprice">${{product.price}}</span>
+                                        <p class="catpath">Mobile Phones » {{product.brand}}</p>
+                                        </section>
+                                        <section class="list-right">
+                                        <span class="date">Date, {{product.created}}</span>
+                                        <span class="cityname">City name</span>
+                                        </section>
+                                        <div class="clearfix"></div>
+                                        </li> 
+                                    </a>
+                                {% endfor %}
 							</ul>
 						</div>
 							</div>
-						</div>
-						
-						{% if product_list.has_other_pages %}
-						<ul class="pagination pagination-sm">
-							{% if product_list.has_previous %}
-								<li><a href="?page={{ product_list.previous_page_number }}">Prev</a></li>
-							{% else %}
-								<li class="disabled"></li>
-							{% endif %}
+                        </div>
+                        
+                        {% if product_list.has_other_pages %}
+                          
+                            <ul class="pagination pagination-sm">
+                                {% if product_list.has_previous %}
+                                    <li><a href="?page={{ product_list.previous_page_number }}">Prev</a></li>
+                                {% else %}
+                                    <li class="disabled"></li>
+                                {% endif %}
+                                    
+                                {% for pages in product_list.paginator.page_range %}
+                                    {% if product_list.number == pages %}
+                                        <li><a href="#">{{pages}}</a></li>
+                                    {% else %}
+                                        <li><a href="?page={{pages}}">{{pages}}</a></li>
+                                    {% endif %}
+                                    
+                                {% endfor %}
+                                    
+                                
+                                {% if product_list.has_next %}
+                                    <li><a href="?page={{ product_list.next_page_number }}">Next</a></li>
+                                {% else %}
+                                    <li class="disabled"></li>
+                                {% endif %}
+                                   
+                            </ul>
 
-							{% for pages in product_list.paginator.page_range %}
-								{% if product_list.number == pages %}
-								<li><a href="#">{{pages}}</a></li>
-								{% else %}
-								<li><a href="?page={{pages}}">{{pages}}</a></li>
-								{% endif %}
-								
-							{% endfor %}
-
-							{% if product_list.has_next %}
-								<li><a href="?page={{ product_list.next_page_number }}">Next</a></li>
-							{% else %}
-								<li class="disabled"></li>
-							{% endif %}
-						</ul>
-
-						{% endif %}
+                        {% endif %}
 					  </div>
 					</div>
 				</div>
@@ -174,6 +178,6 @@
 			</div>
 		</div>	
 	</div>
-	<!-- // Products -->
-
-	{% endblock body %}
+    <!-- // Products -->
+    
+{% endblock body %}
